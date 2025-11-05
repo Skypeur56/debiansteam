@@ -13,17 +13,13 @@ export DB_TYPE=sqlite
 export DB_SQLITE_DATABASE=${DB_SQLITE_DATABASE:-/home/container/.n8n/database.sqlite}
 
 # SSL Certificate configuration
-if [ ! -z "${N8N_SSL_KEY}" ] && [ ! -z "${N8N_SSL_CERT}" ]; then
+if [ -n "${N8N_SSL_KEY}" ] && [ -n "${N8N_SSL_CERT}" ]; then
     export N8N_PROTOCOL=https
-    export N8N_SSL_KEY=${N8N_SSL_KEY}
-    export N8N_SSL_CERT=${N8N_SSL_CERT}
 fi
 
 # Basic auth configuration (optional)
-if [ ! -z "${N8N_BASIC_AUTH_USER}" ] && [ ! -z "${N8N_BASIC_AUTH_PASSWORD}" ]; then
+if [ -n "${N8N_BASIC_AUTH_USER}" ] && [ -n "${N8N_BASIC_AUTH_PASSWORD}" ]; then
     export N8N_BASIC_AUTH_ACTIVE=true
-    export N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
-    export N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
 fi
 
 # Webhook URL configuration
