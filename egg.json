@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-11-05T03:47:00+00:00",
+    "name": "n8n",
+    "author": "support@pterodactyl.io",
+    "description": "n8n is a fair-code licensed workflow automation platform with native AI capabilities. This egg runs n8n with SQLite database and SSL support.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io/skypeur56/debiansteam:latest": "ghcr.io/skypeur56/debiansteam:latest"
+    },
+    "file_denylist": [],
+    "startup": "/bin/bash /entrypoint.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Editor is now accessible\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n# n8n Installation Script\r\n\r\napt update\r\napt install -y curl ca-certificates\r\n\r\ncd /mnt/server\r\n\r\n# Create .n8n directory\r\nmkdir -p .n8n\r\n\r\necho \"n8n will be installed on first startup\"",
+            "container": "node:20-bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "n8n Protocol",
+            "description": "Protocol to use (http or https). Set to https if using SSL certificates.",
+            "env_variable": "N8N_PROTOCOL",
+            "default_value": "http",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:http,https",
+            "field_type": "text"
+        },
+        {
+            "name": "n8n Host",
+            "description": "Host to bind n8n to. Use 0.0.0.0 to listen on all interfaces.",
+            "env_variable": "N8N_HOST",
+            "default_value": "0.0.0.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SQLite Database Path",
+            "description": "Path to the SQLite database file.",
+            "env_variable": "DB_SQLITE_DATABASE",
+            "default_value": "/home/container/.n8n/database.sqlite",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SSL Key Path",
+            "description": "Path to SSL private key file (optional, leave empty if not using SSL).",
+            "env_variable": "N8N_SSL_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SSL Certificate Path",
+            "description": "Path to SSL certificate file (optional, leave empty if not using SSL).",
+            "env_variable": "N8N_SSL_CERT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Webhook URL",
+            "description": "The URL n8n will use for webhooks. Should match your external URL.",
+            "env_variable": "WEBHOOK_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Basic Auth User",
+            "description": "Username for basic authentication (optional).",
+            "env_variable": "N8N_BASIC_AUTH_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Basic Auth Password",
+            "description": "Password for basic authentication (optional).",
+            "env_variable": "N8N_BASIC_AUTH_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        }
+    ]
+}
