@@ -7,6 +7,7 @@ cd /home/container
 export N8N_PORT=${SERVER_PORT:-5678}
 export N8N_PROTOCOL=${N8N_PROTOCOL:-http}
 export N8N_HOST=${N8N_HOST:-0.0.0.0}
+export N8N_USER_FOLDER=/home/container/.n8n
 
 # Use SQLite as the database
 export DB_TYPE=sqlite
